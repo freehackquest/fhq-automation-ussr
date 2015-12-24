@@ -1,6 +1,18 @@
 # automation-ussr
 
-## Installation
+## Use Docker
+
+Build image: `# docker build --rm=true -t ctfight:automation-ussr ./`
+Run container: `# docker run -t --name=keva-automation-ussr ctfight:automation-ussr`
+Stop container: `docker stop $(docker ps -a | grep "ctfight:automation-ussr" | sed -s 's/.*\([0-9a-z]\{12,12\}\) .*/\1/')`
+Remove container: `# docker rm $(docker ps -a | grep "ctfight:automation-ussr" | sed -s 's/.*\([0-9a-z]\{12,12\}\) .*/\1/')`
+Remove image: `# docker rmi -f $(docker images | grep automation-ussr | sed -s 's/.* \([0-9a-z]\{12,12\}\) .*/\1/')`
+
+```
+# docker images | grep automation-ussr
+``` 
+
+## Manual Installation
 
 Web: `sudo apt-get install apache2 mysql-server mysql-client php5`
 
