@@ -7,11 +7,11 @@ from os import listdir
 from os.path import isfile, join
 
 #host="80.89.147.43"
-host="localhost"
+host="automation-ussr.freehackquest.com"
 port=4445
-user_token="FaNKQTWyqy"
-jury_sys="http://localhost/automation-ussr/"
-#jury_sys="http://automation-ussr.sea-kg.com/"
+user_token="here_your_token" # please get token on http://automation-ussr.freehackquest.com/
+# jury_sys="http://localhost/automation-ussr/"
+jury_sys="http://automation-ussr.freehackquest.com/"
 
 # search new flag id
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

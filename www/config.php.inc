@@ -1,7 +1,7 @@
 <?php
 	$dbhost = 'localhost';
-	$dbuser = 'automation-ussr';
-	$dbpass = 'automation-ussr';
+	$dbuser = 'ussruser';
+	$dbpass = 'ussrpassword';
 	$dbname = 'automation-ussr';
 	$conn = new PDO(
 		'mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8',

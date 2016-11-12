@@ -39,32 +39,37 @@ Or in 'hand mode':
 	$ cd /usr/share/ctfight/services/ussr-storage/service/
 	$ sudo ./ussr-storage.py
 
+Check service on 4445 port:
+
+	telnet localhost 4445
+
 ### Install database:
 
-	cd ~/automation-ussr.git/
-	sudo mysql -u root -p
+	$ cd ~/automation-ussr.git/
+	$ mysql -u root -p
 
-	mysql> CREATE DATABASE automation-ussr;
-	mysql> CREATE USER 'automation-ussr'@'localhost' IDENTIFIED BY 'automation-ussr';
-	mysql> USE automation-ussr;
-	mysql> GRANT ALL ON `automation-ussr`.* TO 'automation-ussr'@'localhost';
+	mysql> CREATE DATABASE `automation-ussr`;
+	mysql> CREATE USER 'ussruser'@'localhost' IDENTIFIED BY 'ussrpassword';
+	mysql> USE `automation-ussr`;
+	mysql> GRANT ALL ON `automation-ussr`.* TO 'ussruser'@'localhost';
 	mysql> FLUSH PRIVILEGES;
+	mysql> exit;
+
+Create tables
 	
-	... here create all tables from file automation-ussr.sql ...
-	
-	mysql> quit;
-	
+	$ mysql -u ussruser -p "automation-ussr" < automation-ussr.sql
 
 ### Install web:
 
 Copy files to web directory:
 
 	cd ~/automation-ussr.git/
-	sudo cp -R www/* /var/www/html
+	sudo ln -s `pwd`/www /var/www/html/automation-ussr
 
 Configure config in nano or you favorite editor
-	
-	`sudo nano /etc/www/html/config.php`
+
+	$ cp www/config.php.inc www/config.php
+	$ nano /etc/www/html/config.php
 
 ### Install cron jury (putting flags to service)
 
@@ -79,7 +84,9 @@ Install python-mysql module:
 
 Configure db connection:
 
-	`nano /home/user/automate-ussr.git/cron_jury.py`
+	$ cd ~/automation-ussr.git/
+	$ cp cron_jury_config.py.inc cron_jury_config.py
+	$ nano cron_jury_config.py
 
 Configure cron on every minute:
 

@@ -4,16 +4,17 @@
 import socket, sys, re, os, errno, math, errno, random, string
 import uuid
 import MySQLdb as mdb
+from cron_jury_config import dbhost
+from cron_jury_config import dbname
+from cron_jury_config import dbuser
+from cron_jury_config import dbpass
 
 def randomword(length):
    return ''.join(random.choice(string.lowercase) for i in range(length))
 
-dbhost='localhost'
-dbname='automation-ussr'
-dbuser='automation-ussr'
-dbpass='automation-ussr'
 service_flags='/usr/share/ctfight/services/ussr-storage/service/flags/'
 
+con = None
 # http://zetcode.com/db/mysqlpython/
 try:
 	con = mdb.connect(dbhost, dbuser, dbpass, dbname);
@@ -51,7 +52,7 @@ except mdb.Error, e:
 	print "Error %d: %s" % (e.args[0], e.args[1])
 	sys.exit(1)
 finally:
-	if con:
+	if con != None:
 		cur.close()
 		con.close()
         

@@ -57,3 +57,4 @@ docs/_build/
 target/
 
 www/config.php
+cron_jury_config.py
