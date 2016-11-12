@@ -3,6 +3,7 @@
  
 import socket, sys, re, os, errno, math, errno, random, string
 import uuid
+import time
 import MySQLdb as mdb
 from cron_jury_config import dbhost
 from cron_jury_config import dbname
@@ -11,6 +12,9 @@ from cron_jury_config import dbpass
 
 def randomword(length):
    return ''.join(random.choice(string.lowercase) for i in range(length))
+
+def print_log(s):
+	print(time.strftime('%X %x %Z') + " => " + s)
 
 service_flags='/usr/share/ctfight/services/ussr-storage/service/flags/'
 
@@ -21,7 +25,7 @@ try:
 	cur = con.cursor()
 	cur.execute("SELECT VERSION()");
 	ver = cur.fetchone()
-	print("MySQL version: %s" % ver);
+	print_log("MySQL version: %s" % ver);
 	
 	# clean old flags from system
 	# 
@@ -31,7 +35,7 @@ try:
 	for row in rows:
 		filepath = service_flags + row[0];
 		if(os.path.isfile(filepath)):
-			print("FLAG REMOVED BY ID: " + row[0])
+			print_log("FLAG REMOVED BY ID: " + row[0])
 			os.remove(filepath)
 	i=0
 	while(i < 20):
@@ -42,14 +46,14 @@ try:
 		res = res.strip();
 		
 		if (res == "[OK]"):
-			print("FLAG PUTTED: " + flagid + " => " + flag)
+			print_log("FLAG PUTTED: " + flagid + " => " + flag)
 			cur.execute("INSERT INTO flags(flagid,flag,dt_start,dt_end,userid) VALUES('" + flagid + "','" + flag + "',NOW(),DATE_ADD(NOW(), INTERVAL 15 MINUTE),0)")
 			con.commit()
 		else:
-			print "Service corrupt - need restart service"
+			print_log("Service corrupt - need restart service")
 
 except mdb.Error, e:
-	print "Error %d: %s" % (e.args[0], e.args[1])
+	print_log("Error %d: %s" % (e.args[0], e.args[1]))
 	sys.exit(1)
 finally:
 	if con != None:
