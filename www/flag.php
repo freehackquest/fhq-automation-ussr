@@ -26,18 +26,23 @@
 	
 	if(!isset($_GET['token']) && !isset($_GET['flag'])) {
 		// $conn->close();
-		die($flag_was_not_accepted);
+		echo($flag_was_not_accepted);
+		exit;
 	}
 	
 	$token = $_GET['token'];
 	$flag = strtoupper($_GET['flag']);
 
-	if (!preg_match("/^[A-Za-z0-9]*$/", $token))
-		die($flag_was_not_accepted."Invalid token");
+	if (!preg_match("/^[A-Za-z0-9]*$/", $token)){
+		echo($flag_was_not_accepted."Invalid token");
+		exit;
+	}
 
 	// 6a331fd2-133a-4713-9587-12652d34666d
-	if (!preg_match("/^[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}$/", $flag))
-		die($flag_was_not_accepted." (6 - flag has wrong format)");
+	if (!preg_match("/^[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}$/", $flag)){
+		echo($flag_was_not_accepted." (6 - flag has wrong format)");
+		exit;
+	}
 
 	include_once('config.php');
 
@@ -50,10 +55,13 @@
 		if ($data = $stmt->fetch())
 			$count = $data['cnt'];
 
-		if ($count == 0)
-			die($flag_was_not_accepted." (4 - Token did not found)");
-		else if ($count > 1)
-			die($flag_was_not_accepted." (15 - System has errors, please say about to admin)");
+		if ($count == 0){
+			echo($flag_was_not_accepted." (4 - Token did not found)");
+			exit;
+		}else if ($count > 1){
+			echo($flag_was_not_accepted." (15 - System has errors, please say about to admin)");
+			exit;
+		}
 	}
 	
 	// search user id
@@ -64,8 +72,10 @@
 		if ($data = $stmt->fetch())
 			$userid = $data['id'];
 
-		if ($userid == 0)
-			die($flag_was_not_accepted." (16 - User did not found by token)");
+		if ($userid == 0){
+			echo($flag_was_not_accepted." (16 - User did not found by token)");
+			exit;
+		}
 	}
 
 	// insert to tries
@@ -100,14 +110,17 @@
 		$stmt->execute(array($flag));
 		if ($data = $stmt->fetch()){
 			if($data['ti'] < 0){
-				die($flag_was_not_accepted." (8 - flag is old)");
+				echo($flag_was_not_accepted." (8 - flag is old)");
+				exit;
 			}else{
 				if ($data['userid'] == $userid) {
-					die($flag_was_not_accepted." (9 - flag already belongs to you)");
+					echo($flag_was_not_accepted." (9 - flag already belongs to you)");
+					exit;
 				}
 				
 				if ($data['userid'] != $userid && $data['userid'] != 0) {
-					die($flag_was_not_accepted." (10 - flag belongs to another user)");
+					echo($flag_was_not_accepted." (10 - flag belongs to another user)");
+					exit;
 				}
 
 				$stmt_update = $conn->prepare('UPDATE flags SET userid = ? WHERE flag = ? AND dt_end > NOW() AND userid <> ? AND userid = 0');
@@ -115,7 +128,8 @@
 				echo "[FLAG ACCEPTED]";
 			}
 		}else{
-			die($flag_was_not_accepted." (7 - flag is not exists)");
+			echo($flag_was_not_accepted." (7 - flag is not exists)");
+			exit;
 		}
 	}
 
