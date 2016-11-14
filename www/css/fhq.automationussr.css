@@ -37,6 +37,7 @@ h1 {
 	/*position: relative;*/
 	vertical-align: top;
 	text-align: left;
+	background-color: rgba(228,228,228,0.7);
 }
 
 .content-header{
@@ -52,7 +53,9 @@ h1 {
 }
 
 .table{
-	display: table
+	display: table;
+	width: 100%;
+	padding: 0px;
 }
 
 .row{
@@ -64,5 +67,11 @@ h1 {
 	display: table-cell;
 	padding: 3px;
 	text-align: center;
-	border-bottom: 1px solid #e4e4e4;
+	border-bottom: 1px solid #fff;
+}
+
+.row:hover{
+	background: #3e3e3e;
+	color: #e4e4e4;
+	cursor: pointer;
 }
