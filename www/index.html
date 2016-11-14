@@ -1,231 +1,50 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>CTFight. Automation USSR.</title>
-		<style>
-			body {
-				padding: 0px;
-				margin: 0px;
-				/*font: bold 12pt/10pt trebuchet ms,verdana,arial,helvetica;*/
-				font: bold 12pt/10pt arial;
-				color: #efa7a7;
-			}
-			h1 {
-				padding: 0px;
-				margin: 0px;
-			}
-			.header{
-				display: inline-block;
-				padding: 0px;
-				padding-bottom: 10px;
-				margin: 0px;
-				background-image: url(images/backscreen3.png);
-				background-position: top center;
-				background-repeat: no-repeat;
-				width: 100%;
-				height: 150px;
-				/*line-height: 100px;*/
-				vertical-align: middle;
-				text-align: center;
-			}
-			
-			.menu{
-				display: inline-block;
-				width: 100%;
-				padding: 0px;
-				margin: 0px;
-				# 
-			}
-			.menu-item{
-				padding: 10px;
-				margin: 0px;
-				background-color: #FFA800;
-				transition: background-color 0.25s linear;
-			}
-
-			.menu-item:hover{
-				background-color: #FFA899;
-			}
-			.content{
-				padding: 0px;
-				margin: 0px;
-				vertical-align: top;
-				border-style: solid;
-				border-width:0px;
-				border-color:red;
-			}
-			
-			.content-block{
-				display: inline-block;
-				border-style: solid;
-				border-width:2px;
-				border-color:#fa7902;
-				width: 500px;
-				margin: 10px;
-				/*position: relative;*/
-				vertical-align: top;
-				text-align: left;
-			}
-			
-			.content-header{
-				background-color: #d8560b;
-				color: #000000;
-				padding: 10px;
-			}
-			.content-text{
-				padding: 10px;
-			}
-
-			.rating{
-				padding: 2px;
-			}
-
-			.table{
-				display: table
-			}
-			
-			.row{
-				display: table-row;
-				
-			}
-			
-			.cell{
-				display: table-cell;
-				padding: 3px;
-				text-align: center;
-				border-bottom: 1px solid #D8560B;
-			}
-
-			a:link { color: #efa7a7; }
-			a:visited { color: #efa7a7; }
-			a:hover { color: #fff; }
-			a:active { color: #efa7a7; }
-		</style>
+		<title>Free Hack Quest / Automation USSR (RU)</title>
+		<link href="http://freehackquest.com/css/fhq.css?ver=1" rel="stylesheet" type="text/css">
+		<link href="css/fhq.automationussr.css" rel="stylesheet" type="text/css">
+		<script src="js/jquery-3.1.0.min.js" type="text/javascript"></script>
+		<script src="http://freehackquest.com/js/fhq.base.js"></script>
+		<script src="http://freehackquest.com/js/fhq.localization.js"></script>
+		<script src="http://freehackquest.com/js/fhq.copyright.js"></script>
+		<script src="js/fhq.automation-ussr.js"></script>
 		
-		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<!-- Yandex.Metrika counter -->
 		<script type="text/javascript">
-			function accept_flag(){
-				$("#accept-result").html("Отправка...");
-				var data = {};
-				data.token = $("#accept-token").val();
-				data.flag = $("#accept-flag").val();
-				$.ajax({
-					url: 'flag.php',
-					type: 'GET',
-					data: data,
-					success: function(response){
-						$("#accept-result").html(response);
-					},
-					error: function(xhr){
-						if(xhr.status == 404)
-							$("#accept-result").html("Ненайдена страница flag.php");
-						else
-							$("#accept-result").html("Ошибка получения токена");
-					}
-				});
-			}
-			
-			function get_token(){
-				$("#user-token").html("Получение токена...");
-				var data = {};
-				data.username = $("#user-name").val();
-				$.ajax({
-					url: 'signup.php',
-					type: 'GET',
-					data: data,
-					success: function(response){
-						$("#user-token").html(response);
-					},
-					error: function(xhr){
-						if(xhr.status == 404)
-							$("#user-token").html("Ненайдена страница signup.php");
-						else
-							$("#user-token").html("Ошибка при регистрации");
-					}
-				});
-			}
-			
-			var ur = undefined;
-			
-			function updateRating(){
-				// console.log("update rating");
-				if(!ur) ur = setInterval(updateRating, 5000);
-				$.ajax({
-					// url: 'http://automation-ussr.sea-kg.com/rating.php',
-					url: 'rating.php',
-					type: 'GET',
-					success: function(resp){
-						// console.log(resp);
-						for(var i = 0; i < resp.rating.length; i++){
-							var t = resp.rating[i];
-							if(($("#rating" + i)).length == 0){
-								$("#rating").append('<div class="rating row" id="rating' + i + '"></div>');
-							}
+			if(window.location.host == "automation-ussr.freehackquest.com"){
+				(function (d, w, c) {
+					(w[c] = w[c] || []).push(function() {
+						try {
+							w.yaCounter32831012 = new Ya.Metrika({
+								id:32831012,
+								clickmap:true,
+								trackLinks:true,
+								accurateTrackBounce:true
+							});
+						} catch(e) { }
+					});
 
-							var diff = [
-								{ s: 0,			img: '01-ryadovoi.png', 			title: 'Рядовой' },
-								{ s: 25,		img: '02-efreitor.png', 			title: 'Ефрейтор' },
-								{ s: 50,		img: '03-ml_serjant.png', 			title: 'Младший сержант' },
-								{ s: 100,		img: '04_serjant.png',				title: 'Сержант' },
-								{ s: 150,		img: '05-st_serjant.png', 			title: 'Старший сержант' },
-								{ s: 300,		img: '06-starshina.png', 			title: 'Старшина' },
-								{ s: 400,		img: '07-praporschik.png', 			title: 'Прапорщик' },
-								{ s: 500,		img: '08-st_praporschik.png', 		title: 'Старший прапорщик' },
-								{ s: 1000, 		img: '09-ml_leitinant.png', 		title: 'Младший лейтинант' },
-								{ s: 1500, 		img: '10-leitinant.png', 			title: 'Лейтинант' },
-								{ s: 2000, 		img: '11-st_leitinant.png', 		title: 'Старший лейтинант' },
-								{ s: 4000, 		img: '12-kapitan.png', 				title: 'Капитан' },
-								{ s: 5000, 		img: '13-major.png', 				title: 'Майор' },
-								{ s: 6000, 		img: '14-podpolkovnik.png', 		title: 'Подполковник' },
-								{ s: 8000,		img: '15-polkovnik.png', 			title: 'Полковник' },
-								{ s: 10000,		img: '16-general_major.png', 		title: 'Генерал-майор' },
-								{ s: 15000,		img: '17-general_leitinant.png', 	title: 'Генерал-лейтинант' },
-								{ s: 20000,		img: '18-general_polkovnik.png', 	title: 'Генерал-полковник' },
-								{ s: 25000,		img: '19-general_armii.png', 		title: 'Генерал Армии' },
-								{ s: 50000,		img: '20-marshal.png', 				title: 'Маршал' },
-								{ s: 100000,		img: '21-generalissimus.png', 		title: 'Генералиссимус' },
-							];
+					var n = d.getElementsByTagName("script")[0],
+						s = d.createElement("script"),
+						f = function () { n.parentNode.insertBefore(s, n); };
+					s.type = "text/javascript";
+					s.async = true;
+					s.src = "https://mc.yandex.ru/metrika/watch.js";
 
-							var pogon = '-';
-							if(t.score >= 0){
-								for (var i1 = 0; i1 < diff.length; i1++){
-									var d = diff[i1];
-									var s_min = d.s;
-									var s_max = diff[i1+1] ? diff[i1+1].s : 100000000;
-									if(t.score >= s_min && t.score < s_max){
-										pogon = '<img src="images/' + d.img + '" title="' + d.title + '"/>'
-									}
-								}
-							}
-							
-							$("#rating" + i).html('<div class="cell">' + pogon + '</div>'
-								+ '<div class="cell">' + t.score + '</div>'
-								+ '<div class="cell">' + t.name + '</div>'
-								+ '<div class="cell">' + t.attack + '</div>'
-								+ '<div class="cell">' + t.shtraf + '</div>'
-								+ '<div class="cell">' + t.tries + '</div>'
-							);
-						}
-					}
-				});
+					if (w.opera == "[object Opera]") {
+						d.addEventListener("DOMContentLoaded", f, false);
+					} else { f(); }
+				})(document, window, "yandex_metrika_callbacks");
 			}
 		</script>
-
+		<noscript><div><img src="https://mc.yandex.ru/watch/32831012" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		<!-- /Yandex.Metrika counter -->
 	</head>
-	<body bgcolor="#000000" link="#000000" vlink="#000000" onload="updateRating();">
+	<body class="">
     <center>
 		<div class="header">
-			<!-- h1>CTFight. Automation USSR.</h1 -->
 		</div><br><br><br>
-		<!-- div class="menu">
-			<a class="menu-item" href="">Description</a>
-			<a class="menu-item" href="">Prezentation</a>
-			<a class="menu-item" href="">Game</a>
-			<a class="menu-item" href="">Rules</a>
-			<a class="menu-item" href="">Registration</a>
-			<a class="menu-item" href="">Sources</a>
-			<a class="menu-item" href="">Accept Flag</a>
-		</div-->
 		<div class="content">
 			<div class="content-block">
 				<div class="content-header">Описание</div>
@@ -260,17 +79,17 @@
 					11. Если есть вопросы их можно слать сюда: mrseakg@gmail.com.<br><br>
 					<h3>Регистрация</h3>
 					После получения токена обязательно сохраните его к себе в файл<br><br>
-					<input id="user-name" placeholder="NAME" value=""/>
-					<button onclick="get_token();">Получить токен</button><br><br>
+					<input type="text" id="user-name" placeholder="NAME" value=""/>
+					<a class="fhqbtn" id="get_token" href="javascript:void(0)">Получить токен</a><br><br>
 					<div id="user-token"></div>
 					<h3>Прием флагов</h3>
-					<input id="accept-token" placeholder="TOKEN" value=""/>
-					<input id="accept-flag" placeholder="FLAG" value=""/>
-					<button onclick="accept_flag();">Отправить</button><br><br>
+					<input type="text" id="accept-token" placeholder="TOKEN" value=""/>
+					<input type="text" id="accept-flag" placeholder="FLAG" value=""/>
+					<a id="accept_flag" class="fhqbtn" href="javascript:void(0)">Отправить</a><br><br>
 					<div id="accept-result"></div><br><br>
 					Или отправить флаг по ссылке:<br><br>
 					<center>
-						<a href="http://automation-ussr.sea-kg.com/flag.php?token=your_token&flag=someflag" target="_blank">http://automation-ussr.sea-kg.com/flag.php?token=your_token&flag=someflag</a>
+						<a id="link_send" href="" target="_blank"></a>
 					</center>
 					<br/><br/>
 				</div>

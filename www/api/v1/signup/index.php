@@ -13,7 +13,7 @@
 	if (!preg_match("/^[A-Za-z0-9\-_]*$/", $username))
 		die("Username must be has only English characters and numbers ");
 
-	include_once('config.php');
+	include_once('../../../config.php');
 
     $stmt = $conn->prepare('SELECT COUNT(*) as cnt FROM users WHERE name = ?');
     $stmt->execute(array($username));

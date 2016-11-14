@@ -2,7 +2,7 @@
 	header("Access-Control-Allow-Origin: *");
 	header('Content-Type: application/json');
 
-	include_once('config.php');
+	include_once('../../../config.php');
 	$result = array('rating' => array());
 	$stmt = $conn->prepare('SELECT name, score, attack, shtraf, tries FROM users ORDER BY score DESC');
     $stmt->execute();
