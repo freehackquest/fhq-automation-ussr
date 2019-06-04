@@ -1,6 +1,7 @@
 <?php
-	
-	if(!isset($_GET['username'])){
+	header("Access-Control-Allow-Origin: *");
+
+	if (!isset($_GET['username'])) {
 		die("Missing requared parameter username");
 	}
 	
