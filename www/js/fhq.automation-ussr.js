@@ -117,7 +117,7 @@ $(document).ready(function(){
 	$('#get_token').unbind().bind('click', function(){
 		fhq.ui.get_token();
 	});
-	var link = "http://" + location.host + location.pathname + "api/v1/flag/?token=your_token&flag=someflag";
+	var link = "https://" + location.host + location.pathname + "api/v1/flag/?token=your_token&flag=someflag";
 	$('#link_send').attr({'href': link});
 	$('#link_send').html(link);
 	
